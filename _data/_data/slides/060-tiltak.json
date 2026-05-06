@@ -1,0 +1,22 @@
+{
+  "order": 60,
+  "title": "Tiltak som løfter undervisning",
+  "layout": "cards",
+  "theme": "warm",
+  "eyebrow": "Hva endrer det elevene møter hver dag",
+  "heading": "Seks tiltak som faktisk *løfter* undervisning.",
+  "lead": "",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [
+    { "num": "→", "title": "Instruksjonsledelse", "body": "Omprioritert ledertid, ikke nytt budsjett. Hindrer at små skoler drukner i drift." },
+    { "num": "→", "title": "Data- og forbedringssykluser", "body": "Få indikatorer, månedlige læringsmøter, kvartalsvise gjennomganger." },
+    { "num": "→", "title": "Felles klasseledelse", "body": "Én modell på tvers av klasser. I små miljøer smitter både god og dårlig kultur raskt." },
+    { "num": "→", "title": "Kollegabasert utvikling", "body": "Observasjon og veiledning endrer praksis mer enn enkeltdager med kurs." },
+    { "num": "→", "title": "Inkludering og nærvær", "body": "Tidlig oppfølging, tydelige terskler, rask kontakt med hjem og tjenester." },
+    { "num": "→", "title": "Målrettet assistentbruk", "body": "Trent og koordinert med lærer — ikke generell skyggekapasitet." }
+  ],
+  "stats": [],
+  "bullets": []
+}

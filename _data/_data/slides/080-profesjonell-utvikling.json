@@ -1,0 +1,21 @@
+{
+  "order": 80,
+  "title": "Profesjonell utvikling",
+  "layout": "split",
+  "theme": "warm",
+  "eyebrow": "EEF · Profesjonell utvikling",
+  "heading": "Endring i *praksis* — ikke kursdager.",
+  "lead": "Vellykket implementering er sosial og samarbeidende. Få, godt støttede sykluser slår mange parallelle initiativ.",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [],
+  "stats": [],
+  "bullets": [
+    { "strong": "Bygg kunnskap", "text": "hos lærerne — felles fagspråk og evidens." },
+    { "strong": "Motiver", "text": "gjennom mening, mestring og medvirkning." },
+    { "strong": "Utvikle teknikker", "text": "konkrete grep, ikke abstrakte prinsipper." },
+    { "strong": "Forankre", "text": "over tid — la praksis sette seg." },
+    { "strong": "Rytme", "text": "Utforske → Forberede → Levere → Forankre." }
+  ]
+}

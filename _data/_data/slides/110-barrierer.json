@@ -1,0 +1,22 @@
+{
+  "order": 110,
+  "title": "Barrierer og mottiltak",
+  "layout": "cards",
+  "theme": "warm",
+  "eyebrow": "Risikoer og hvordan vi møter dem",
+  "heading": "Den største barrieren er *gjennomføringskapasitet* — ikke mangel på idéer.",
+  "lead": "",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [
+    { "num": "!", "title": "Lederoverbelastning", "body": "Mottiltak: Adm. avlastning, delt juridisk/økonomistøtte, tydelig oppgaveliste for rektor." },
+    { "num": "!", "title": "For mange satsinger", "body": "Mottiltak: Maks to utviklingsspor om gangen. Bruk Explore–Prepare–Deliver–Sustain som rytme." },
+    { "num": "!", "title": "Fragmenterte støttefunksjoner", "body": "Mottiltak: Fast elevstøtteteam med felles møteplan og klare terskler." },
+    { "num": "!", "title": "Rekrutteringssårbarhet", "body": "Mottiltak: Delte stillinger, intern karrierevei, strukturert onboarding og veiledning." },
+    { "num": "!", "title": "Svak lokal relevans", "body": "Mottiltak: Lokal profil rundt arbeidsliv, kultur, natur og overganger." },
+    { "num": "!", "title": "Feil bruk av digitalt", "body": "Mottiltak: Bruk digitalt der lokal kapasitet er knapp — alltid med stedlig lærerforankring." }
+  ],
+  "stats": [],
+  "bullets": []
+}

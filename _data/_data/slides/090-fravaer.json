@@ -1,0 +1,19 @@
+{
+  "order": 90,
+  "title": "Fravær og inkludering",
+  "layout": "cards",
+  "theme": "warm",
+  "eyebrow": "Fravær er både indikator og intervensjonssarena",
+  "heading": "Familier velger skoler de opplever som *pålitelige*.",
+  "lead": "For førstevalgsarbeidet er nærværsarbeid kanskje det viktigste enkelttiltaket: foreldre snakker om skoler som ser barna deres.",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [
+    { "num": "→", "title": "Helhetlig forståelse", "body": "Bygg kunnskap om elever og familier — ikke bare tall i et regneark." },
+    { "num": "→", "title": "Universelle tiltak", "body": "Kultur av fellesskap og tilhørighet for alle, ikke bare risikoelever." },
+    { "num": "→", "title": "Målrettet oppfølging", "body": "Tydelige terskler, rask kontakt hjem, dokumentert effekt over tid." }
+  ],
+  "stats": [],
+  "bullets": []
+}

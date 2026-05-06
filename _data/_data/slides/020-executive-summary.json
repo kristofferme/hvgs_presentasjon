@@ -1,0 +1,19 @@
+{
+  "order": 20,
+  "title": "Executive Summary",
+  "layout": "cards",
+  "theme": "warm",
+  "eyebrow": "Hovedfunn",
+  "heading": "Skoleledelse virker når den retter seg mot *undervisning og læring*, ikke bare drift.",
+  "lead": "",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [
+    { "num": "01", "title": "Pedagogisk fokus", "body": "Instruksjonsrettet ledelse har 3–4× sterkere sammenheng med elevutfall enn transformasjonsledelse." },
+    { "num": "02", "title": "Kapabel kjerne", "body": "Distriktsskoler trenger en kompakt, tydelig rigget kjerne — og delte spesialistfunksjoner i nettverk." },
+    { "num": "03", "title": "Førstevalg via tillit", "body": "Skoler blir førstevalg når kvalitet, trygghet, relevans og resultater oppleves konsistente og dokumentert." }
+  ],
+  "stats": [],
+  "bullets": []
+}

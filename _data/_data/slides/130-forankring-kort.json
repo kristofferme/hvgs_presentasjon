@@ -1,0 +1,20 @@
+{
+  "order": 130,
+  "title": "Forankring kort sikt",
+  "layout": "cards",
+  "theme": "warm",
+  "eyebrow": "Forankring · Hustadvika VGS · Kort sikt (0–6 mnd)",
+  "heading": "Fire grep vi kan starte med *i år*.",
+  "lead": "",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [
+    { "num": "01", "title": "Beskytt ledertid", "body": "Fast ukentlig «undervisningsblokk» for klasserombesøk, tilbakemelding og teammøter. Flytt administrative oppgaver til merkantil." },
+    { "num": "02", "title": "Forbedringsgruppe på tvers", "body": "Rektor + avd.ledere PB/HO/TIF + rådgiver eier to mål: ett undervisningsmål og ett elevoppfølgingsmål." },
+    { "num": "03", "title": "Felles klasseledelsesmodell", "body": "Én praksisstandard fra naturbruk blå til studiespesialiserende. Bygger felles språk i et komplekst hus." },
+    { "num": "04", "title": "Funksjonsbeskrivelser", "body": "Én side per rolle: merkantil, rådgiver, nærvær, inkludering, IKT. Færre saker som vandrer." }
+  ],
+  "stats": [],
+  "bullets": []
+}

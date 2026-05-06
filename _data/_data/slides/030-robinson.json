@@ -1,0 +1,17 @@
+{
+  "order": 30,
+  "title": "Robinsons meta-analyse",
+  "layout": "stats",
+  "theme": "deep",
+  "eyebrow": "Robinsons meta-analyse",
+  "heading": "Pedagogisk ledelse vinner over transformasjonsledelse.",
+  "lead": "Den sterkeste enkeltdimensjonen er at ledere både fremmer *og selv deltar i* lærernes profesjonelle læring.",
+  "body": "Ikke å delegere kvalitet — men være med i klasserommet, i veiledningen, i analysen.",
+  "image": "",
+  "image_alt": "",
+  "cards": [],
+  "stats": [
+    { "value": "3–4×", "label": "sterkere sammenheng med elevresultater" }
+  ],
+  "bullets": []
+}

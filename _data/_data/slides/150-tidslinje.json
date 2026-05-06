@@ -1,0 +1,20 @@
+{
+  "order": 150,
+  "title": "Tidslinje",
+  "layout": "cards",
+  "theme": "deep",
+  "eyebrow": "Implementeringsmal",
+  "heading": "Tre års rytme for forbedringsarbeidet.",
+  "lead": "",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [
+    { "num": "Fase 1", "title": "Utforske · mnd 1–3", "body": "Velg ett undervisningsmål og ett oppfølgingsmål. Etabler baseline på læring, fravær, trivsel og søkning." },
+    { "num": "Fase 2", "title": "Forberede · mnd 4–6", "body": "Beskytt ledertid. Lag møteplan, tren støttefunksjoner, planlegg klasseledelsesmodell og profesjonslæringssyklus." },
+    { "num": "Fase 3", "title": "Levere · mnd 7–18", "body": "Gjennomfør to forbedringssykluser. Følg opp nærvær. Utvikle lokal profil. Juster fortløpende." },
+    { "num": "Fase 4", "title": "Forankre · mnd 19–36", "body": "Standardiser det som virker. Bygg rekrutteringsstrategi. Publiser årlig kvalitetsfortelling." }
+  ],
+  "stats": [],
+  "bullets": []
+}

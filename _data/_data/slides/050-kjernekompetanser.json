@@ -1,0 +1,22 @@
+{
+  "order": 50,
+  "title": "Kjernekompetanser",
+  "layout": "split",
+  "theme": "warm",
+  "eyebrow": "Kjernekompetanser",
+  "heading": "Hva må ledergruppen *kunne* sammen?",
+  "lead": "En liten skole trenger ikke flere ledernivåer. Den trenger større ledelseskapasitet enn organisasjonskartet tilsier.",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [],
+  "stats": [],
+  "bullets": [
+    { "strong": "Instruksjonsfokus", "text": "analysere undervisning, ikke bare drift." },
+    { "strong": "Kulturbygging", "text": "bygge tillit, orden og forpliktelse." },
+    { "strong": "Distribuert ledelse", "text": "knyttet til undervisning, ikke bare oppgaver." },
+    { "strong": "Datakompetanse", "text": "gjøre vurdering og fravær om til handling." },
+    { "strong": "Strategisk ressursbruk", "text": "få prioriteringer, holdt over tid." },
+    { "strong": "Nettverksevne", "text": "koble skolen til delte funksjoner og partnere." }
+  ]
+}

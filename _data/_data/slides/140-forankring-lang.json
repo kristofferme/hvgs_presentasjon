@@ -1,0 +1,20 @@
+{
+  "order": 140,
+  "title": "Forankring mellomlang sikt",
+  "layout": "cards",
+  "theme": "warm",
+  "eyebrow": "Forankring · Hustadvika VGS · 6–36 mnd",
+  "heading": "Bygg *førstevalg* på dokumentert kvalitet.",
+  "lead": "",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [
+    { "num": "05", "title": "To forbedringssykluser", "body": "Kollegaveiledning, modellering og lærerdeltakelse. Lederne må delta — ikke bare godkjenne planer." },
+    { "num": "06", "title": "Systematisk nærværsarbeid", "body": "Elev- og familiekartlegging, tydelige terskler, rask kontakt hjem. Kritisk for elever med lang reisevei." },
+    { "num": "07", "title": "Lokal profil — hav og kyst", "body": "Bygg førstevalg rundt det vi er: ny skolebåt, maritime næringer, lokal kultur og natur." },
+    { "num": "08", "title": "Årlig kvalitetsfortelling", "body": "Fravær, trivsel, fullføring, elevstemmer og lokale partnerskap. Omdømme bygges på faktisk kvalitet." }
+  ],
+  "stats": [],
+  "bullets": []
+}

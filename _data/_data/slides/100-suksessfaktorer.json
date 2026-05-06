@@ -1,0 +1,21 @@
+{
+  "order": 100,
+  "title": "Fem suksessfaktorer",
+  "layout": "split",
+  "theme": "teal",
+  "eyebrow": "Det som går igjen",
+  "heading": "Fem *suksessfaktorer* på tvers av casene.",
+  "lead": "Førstevalg kommer ikke av profilidéer. Det kommer av at hverdagen blir så tydelig at familier opplever mindre risiko ved å velge skolen.",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [],
+  "stats": [],
+  "bullets": [
+    { "strong": "Enkel, gjentatt visjon", "text": "alle vet hva skolen vil være." },
+    { "strong": "Konsekvent undervisning", "text": "ikke et løst sett av inspirasjoner." },
+    { "strong": "Strategisk støtte", "text": "funksjoner brukes målrettet, ikke tilfeldig." },
+    { "strong": "Nettverk og lokalsamfunn", "text": "utvider kapasitet og relevans." },
+    { "strong": "Synlig framgang", "text": "søkning, fravær, gjennomføring, anbefaling." }
+  ]
+}
