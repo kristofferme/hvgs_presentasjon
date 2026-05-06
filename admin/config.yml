@@ -1,0 +1,163 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Lokal utvikling: kommenter inn under og kommenter ut git-gateway over
+# local_backend: true
+
+media_folder: "static/uploads"
+public_folder: "/static/uploads"
+
+# Viser preview i CMS-redaktøren
+show_preview_links: true
+
+collections:
+  # ─── PRESENTASJONSINNSTILLINGER ──────────────────────────────────────
+  - name: "settings"
+    label: "⚙️ Presentasjonsinnstillinger"
+    files:
+      - name: "global"
+        label: "Global konfig"
+        file: "_data/settings.json"
+        fields:
+          - label: "Skolelogo (SVG eller PNG)"
+            name: "logo"
+            widget: "image"
+            required: false
+            hint: "Last opp logo. Anbefalt: SVG eller PNG med gjennomsiktig bakgrunn."
+          - label: "Skolens navn"
+            name: "school_name"
+            widget: "string"
+            default: "Hustadvika"
+          - label: "Undertittel under logo"
+            name: "school_subtitle"
+            widget: "string"
+            default: "Vidaregåande skole"
+          - label: "Primærfarge (hex)"
+            name: "color_primary"
+            widget: "string"
+            default: "#0D2B4E"
+            hint: "Navy — f.eks. #0D2B4E"
+          - label: "Sekundærfarge (hex)"
+            name: "color_secondary"
+            widget: "string"
+            default: "#006B6B"
+            hint: "Teal — f.eks. #006B6B"
+          - label: "Aksentfarge (hex)"
+            name: "color_accent"
+            widget: "string"
+            default: "#E8631A"
+            hint: "Oransje — f.eks. #E8631A"
+          - label: "Lysfarge (hex)"
+            name: "color_light"
+            widget: "string"
+            default: "#F7F6F2"
+            hint: "Krem — f.eks. #F7F6F2"
+
+  # ─── SLIDES ─────────────────────────────────────────────────────────
+  - name: "slides"
+    label: "📑 Slides"
+    label_singular: "Slide"
+    folder: "_data/slides"
+    create: true
+    delete: true
+    slug: "{{fields.order}}-{{slug}}"
+    sortable_fields: ["order", "title"]
+    summary: "{{fields.order}}. {{fields.title}} [{{fields.layout}}]"
+    fields:
+      - label: "Rekkefølge"
+        name: "order"
+        widget: "number"
+        value_type: "int"
+        min: 1
+        hint: "Lavere tall kommer først. Bruk 10, 20, 30 for å gjøre det lett å sette inn nye slides mellom."
+
+      - label: "Slide-tittel (intern)"
+        name: "title"
+        widget: "string"
+        hint: "Vises bare i CMS, ikke på presentasjonen."
+
+      - label: "Layout"
+        name: "layout"
+        widget: "select"
+        options:
+          - { label: "🏠 Tittelside (mørk, stor overskrift)", value: "title" }
+          - { label: "📊 Innholdsside — to kolonner", value: "split" }
+          - { label: "🃏 Innholdsside — kortnett (2 eller 3 per rad)", value: "cards" }
+          - { label: "💬 Sitattrekk", value: "quote" }
+          - { label: "📸 Bilde + tekst", value: "image" }
+          - { label: "📈 Stat / nøkkeltall", value: "stats" }
+          - { label: "🏁 Avslutningsside (mørk)", value: "closing" }
+
+      - label: "Bakgrunnstemma"
+        name: "theme"
+        widget: "select"
+        options:
+          - { label: "🌊 Dyp (navy gradient, kystlinjer)", value: "deep" }
+          - { label: "🏔️ Mørk (ren navy)", value: "dark" }
+          - { label: "🌿 Teal", value: "teal" }
+          - { label: "☀️ Lys (krem)", value: "warm" }
+        default: "warm"
+
+      - label: "Eyebrow-tekst (liten tekst over tittel)"
+        name: "eyebrow"
+        widget: "string"
+        required: false
+        hint: "F.eks. «Forskningsfunn · 2026» eller «Forankring · Hustadvika VGS»"
+
+      - label: "Overskrift"
+        name: "heading"
+        widget: "text"
+        required: false
+        hint: "Stor overskrift på sliden. Uthev nøkkelord med *ord* (kursiv/aksentfarge)."
+
+      - label: "Ingress / lead-tekst"
+        name: "lead"
+        widget: "text"
+        required: false
+        hint: "En til to setninger under overskriften."
+
+      - label: "Brødtekst / sitatekst"
+        name: "body"
+        widget: "markdown"
+        required: false
+        hint: "Støtter Markdown. For korttekst på «cards»-layout: lag en kort liste."
+
+      - label: "Bilde"
+        name: "image"
+        widget: "image"
+        required: false
+        hint: "Brukes på «image»-layout eller som bakgrunn."
+
+      - label: "Bildebeskrivelse (alt-tekst)"
+        name: "image_alt"
+        widget: "string"
+        required: false
+
+      - label: "Kort (for cards-layout)"
+        name: "cards"
+        widget: "list"
+        required: false
+        summary: "{{fields.title}}"
+        fields:
+          - { label: "Nummer / ikon", name: "num", widget: "string", required: false, hint: "F.eks. 01, ✓, →" }
+          - { label: "Korttittel", name: "title", widget: "string" }
+          - { label: "Korttekst", name: "body", widget: "text" }
+
+      - label: "Nøkkeltall (for stats-layout)"
+        name: "stats"
+        widget: "list"
+        required: false
+        summary: "{{fields.value}}"
+        fields:
+          - { label: "Verdi", name: "value", widget: "string", hint: "F.eks. 3–4×" }
+          - { label: "Etikett", name: "label", widget: "string" }
+
+      - label: "Liste (punkter for split-layout)"
+        name: "bullets"
+        widget: "list"
+        required: false
+        summary: "{{fields.text}}"
+        fields:
+          - { label: "Fet innledning", name: "strong", widget: "string", required: false }
+          - { label: "Tekst", name: "text", widget: "string" }
