@@ -1,0 +1,19 @@
+{
+  "order": 70,
+  "title": "Klasseledelse",
+  "layout": "cards",
+  "theme": "teal",
+  "eyebrow": "Klasseledelse er et resultatfelt",
+  "heading": "Tre samtidige perspektiver — ikke tre adskilte oppgaver.",
+  "lead": "I distriktsskoler gjør små elevgrupper både gode og dårlige kulturer mer merkbare.",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [
+    { "num": "01", "title": "Struktur", "body": "Tydelige rammer og rutiner skaper oversikt og forutsigbarhet." },
+    { "num": "02", "title": "Kultur", "body": "Varme relasjoner og inkluderende fellesskap bygger trygghet og tilhørighet." },
+    { "num": "03", "title": "Læring", "body": "Læringsrettet samspill, varierte arenaer og elevmedvirkning sikrer mestring." }
+  ],
+  "stats": [],
+  "bullets": []
+}

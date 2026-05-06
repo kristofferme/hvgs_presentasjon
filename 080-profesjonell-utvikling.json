@@ -1,0 +1,20 @@
+{
+  "order": 40,
+  "title": "Fire spor for effektiv ledelse",
+  "layout": "cards",
+  "theme": "warm",
+  "eyebrow": "Wallace Foundation · 2023",
+  "heading": "Effektive ledere virker gjennom *fire spor* samtidig.",
+  "lead": "",
+  "body": "",
+  "image": "",
+  "image_alt": "",
+  "cards": [
+    { "num": "01", "title": "Undervisning", "body": "Tett arbeid med klasserom, observasjon, tilbakemelding og felles analyse." },
+    { "num": "02", "title": "Skolekultur", "body": "Bygging av en produktiv kultur: tillit, orden, høye forventninger og tilhørighet." },
+    { "num": "03", "title": "Profesjonssamarbeid", "body": "Strukturer for kollegial læring, lesson study og delt ansvar i lærerteamene." },
+    { "num": "04", "title": "Ressursbruk", "body": "Strategisk bruk av personell, tid og kompetanse mot få, prioriterte mål." }
+  ],
+  "stats": [],
+  "bullets": []
+}
