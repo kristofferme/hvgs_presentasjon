@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hustadvika VGS — Presentasjon</title>
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=tanker@400&f[]=supreme@300,400,500,700&display=swap" />
+<style>
+/* =========================================================
+   TEMA — leses fra settings.json, fallback til Hustadvika
+   CSS-variablene oppdateres dynamisk av JS
+   ========================================================= */
+:root {
+  --navy:         #0D2B4E;
+  --teal:         #006B6B;
+  --orange:       #E8631A;
+  --cream:        #F7F6F2;
+  --navy-deep:    #081A30;
+  --navy-soft:    #1A4373;
+  --teal-soft:    #2A8A8A;
+  --orange-soft:  #F4915A;
+  --ink:          #1A1F2E;
+  --ink-muted:    #5A6478;
+  --line:         rgba(13,43,78,0.14);
+
+  --font-display: "Tanker", Georgia, serif;
+  --font-body:    "Supreme", system-ui, sans-serif;
+
+  --title-size:   clamp(2rem, 5.5vw, 4.5rem);
+  --h2-size:      clamp(1.4rem, 3.2vw, 2.4rem);
+  --h3-size:      clamp(1rem, 1.8vw, 1.35rem);
+  --body-size:    clamp(0.78rem, 1.15vw, 1.05rem);
+  --small-size:   clamp(0.65rem, 0.9vw, 0.85rem);
+  --eyebrow-size: clamp(0.65rem, 0.85vw, 0.78rem);
+
+  --slide-padding: clamp(1.5rem, 4.5vw, 4.5rem);
+  --content-gap:   clamp(0.75rem, 2vw, 2rem);
+  --element-gap:   clamp(0.4rem, 1vw, 1rem);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration:      0.7s;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ─── VIEWPORT BASE ──────────────────────────────────────── */
+html, body { height: 100%; overflow-x: hidden; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+.slide {
+  width: 100vw; height: 100vh; height: 100dvh;
+  overflow: hidden; scroll-snap-align: start;
+  display: flex; flex-direction: column; position: relative;
+}
+.slide-content {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; max-height: 100%; overflow: hidden;
+  padding: var(--slide-padding); position: relative; z-index: 2;
+}
+
+img, .image-container {
+  max-width: 100%; max-height: min(50vh, 400px); object-fit: contain;
+}
+
+/* ─── TEMAKLASSER ────────────────────────────────────────── */
+.slide.dark  { background: var(--navy-deep); color: var(--cream); }
+.slide.deep  { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--cream); }
+.slide.teal  { background: var(--teal); color: var(--cream); }
+.slide.warm  { background: var(--cream); color: var(--ink); }
+
+/* Kystlinjedekor */
+.coast-bg {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(232,99,26,0.06) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(0,107,107,0.08) 0%, transparent 45%);
+}
+.coast-lines {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.15;
+}
+
+/* ─── TYPOGRAFI ──────────────────────────────────────────── */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; }
+h1 { font-size: var(--title-size); }
+h2 { font-size: var(--h2-size); }
+h3 { font-size: var(--h3-size); }
+p  { font-size: var(--body-size); }
+
+.eyebrow {
+  font-family: var(--font-body); font-weight: 500;
+  font-size: var(--eyebrow-size); letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--orange);
+  display: inline-flex; align-items: center; gap: 0.6em;
+}
+.eyebrow::before { content: ""; width: 1.8em; height: 1px; background: currentColor; }
+.dark .eyebrow, .deep .eyebrow, .teal .eyebrow { color: var(--orange-soft); }
+
+.accent { color: var(--orange); }
+.dark .accent, .deep .accent, .teal .accent { color: var(--orange-soft); }
+
+.lead {
+  font-size: clamp(0.9rem, 1.5vw, 1.25rem);
+  line-height: 1.55; color: var(--ink-muted); max-width: 60ch;
+}
+.dark .lead, .deep .lead, .teal .lead { color: rgba(247,246,242,0.78); }
+
+.body-text { max-width: 62ch; color: var(--ink-muted); }
+.dark .body-text, .deep .body-text, .teal .body-text { color: rgba(247,246,242,0.7); }
+
+/* ─── LOGO ───────────────────────────────────────────────── */
+.slide-logo {
+  position: absolute; top: clamp(1rem,2.5vw,2rem);
+  right: var(--slide-padding); z-index: 3;
+}
+.logo { display: inline-flex; align-items: center; gap: 0.7em; }
+.logo-img {
+  height: clamp(24px, 3.5vw, 40px); width: auto;
+  object-fit: contain; max-height: 40px;
+}
+.logo-svg { width: clamp(24px,3.5vw,36px); height: clamp(24px,3.5vw,36px); }
+.logo-text {
+  font-family: var(--font-body); font-weight: 700;
+  font-size: var(--small-size); letter-spacing: 0.05em;
+  text-transform: uppercase; line-height: 1.1;
+  color: inherit;
+}
+.logo-text small {
+  display: block; font-weight: 400; font-size: 0.72em;
+  letter-spacing: 0.12em; opacity: 0.65; margin-top: 0.1em;
+}
+
+/* ─── KORT / GRID ────────────────────────────────────────── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: clamp(0.5rem, 1.2vw, 1rem);
+  margin-top: var(--content-gap);
+}
+.cards-grid.count-2 { grid-template-columns: repeat(2, 1fr); }
+.cards-grid.count-3 { grid-template-columns: repeat(3, 1fr); }
+.cards-grid.count-4 { grid-template-columns: repeat(4, 1fr); }
+
+.card {
+  background: rgba(255,255,255,0.6); border: 1px solid var(--line);
+  border-radius: clamp(8px,1.2vw,14px); padding: clamp(0.9rem,1.8vw,1.6rem);
+  display: flex; flex-direction: column; gap: 0.4em;
+  backdrop-filter: blur(8px);
+}
+.dark .card, .deep .card {
+  background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);
+}
+.teal .card { background: rgba(0,0,0,0.18); border-color: rgba(255,255,255,0.12); }
+
+.card-num {
+  font-family: var(--font-display); font-size: clamp(1.2rem,2vw,1.8rem);
+  color: var(--orange); line-height: 1;
+}
+.dark .card-num, .deep .card-num, .teal .card-num { color: var(--orange-soft); }
+.card-title { font-family: var(--font-display); font-size: var(--h3-size); line-height: 1.1; }
+.dark .card-title, .deep .card-title, .teal .card-title { color: var(--cream); }
+.card-body { font-size: var(--small-size); line-height: 1.45; color: var(--ink-muted); }
+.dark .card-body, .deep .card-body, .teal .card-body { color: rgba(247,246,242,0.72); }
+
+/* ─── SPLIT ──────────────────────────────────────────────── */
+.split {
+  display: grid; grid-template-columns: 0.45fr 0.55fr;
+  gap: clamp(2rem,5vw,5rem); align-items: center; height: 100%;
+}
+@media (max-width: 800px) { .split { grid-template-columns: 1fr; gap: var(--content-gap); } }
+
+/* ─── FEATURE LIST ───────────────────────────────────────── */
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: clamp(0.5rem,1.3vw,1rem); max-width: 58ch; }
+.feature-list li { font-size: var(--body-size); padding-left: 1.4em; position: relative; line-height: 1.5; }
+.feature-list li::before { content: "→"; position: absolute; left: 0; top: 0; color: var(--orange); font-weight: 700; }
+.dark .feature-list li::before, .deep .feature-list li::before, .teal .feature-list li::before { color: var(--orange-soft); }
+.feature-list li strong { color: var(--navy); font-weight: 700; }
+.dark .feature-list li strong, .deep .feature-list li strong, .teal .feature-list li strong { color: var(--cream); }
+
+/* ─── STAT ───────────────────────────────────────────────── */
+.stat-row { display: flex; gap: clamp(1.5rem,4vw,4rem); flex-wrap: wrap; margin-top: var(--element-gap); }
+.stat-value {
+  font-family: var(--font-display); font-size: clamp(2.5rem,9vw,7rem);
+  color: var(--orange); line-height: 0.9; letter-spacing: -0.04em;
+}
+.stat-label { font-size: var(--body-size); color: var(--ink-muted); max-width: 22ch; margin-top: 0.4em; line-height: 1.35; }
+.dark .stat-label, .deep .stat-label, .teal .stat-label { color: rgba(247,246,242,0.7); }
+
+/* ─── QUOTE ──────────────────────────────────────────────── */
+.pullquote {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem,3.5vw,2.8rem);
+  line-height: 1.15; letter-spacing: -0.02em; max-width: 22ch;
+}
+
+/* ─── BILDE ──────────────────────────────────────────────── */
+.image-slide { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem,3vw,3rem); align-items: center; }
+.slide-image {
+  width: 100%; height: auto; border-radius: 12px;
+  max-height: min(52vh, 420px); object-fit: cover;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+@media (max-width: 800px) { .image-slide { grid-template-columns: 1fr; } }
+
+/* ─── TITTELSLIDE ────────────────────────────────────────── */
+.title-slide-content {
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding-bottom: clamp(2.5rem,6vw,5rem);
+}
+.title-slide-content h1 {
+  font-size: clamp(2.5rem,7.5vw,7rem);
+  line-height: 0.93; letter-spacing: -0.03em;
+  margin-top: 0.4em;
+}
+.title-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: clamp(2rem,5vw,4rem); border-top: 1px solid rgba(247,246,242,0.18);
+  padding-top: clamp(0.8rem,1.5vw,1.2rem);
+  font-size: var(--small-size); color: rgba(247,246,242,0.6);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* ─── AVSLUTNING ─────────────────────────────────────────── */
+.closing-content {
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding-bottom: clamp(2.5rem,6vw,5rem);
+}
+.closing-content h2 {
+  font-size: clamp(1.8rem,5vw,4.5rem);
+  line-height: 0.97; letter-spacing: -0.03em; margin-top: 0.4em;
+}
+
+/* ─── SLIDE-NUMMER ───────────────────────────────────────── */
+.slide-number {
+  position: absolute; bottom: clamp(1rem,2.5vw,2rem);
+  left: var(--slide-padding); font-size: var(--eyebrow-size);
+  letter-spacing: 0.18em; color: var(--ink-muted); z-index: 3;
+  font-variant-numeric: tabular-nums;
+}
+.dark .slide-number, .deep .slide-number, .teal .slide-number { color: rgba(247,246,242,0.5); }
+
+/* ─── LOADING SCREEN ─────────────────────────────────────── */
+#loading {
+  position: fixed; inset: 0; background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; transition: opacity 0.5s ease;
+}
+#loading.fade { opacity: 0; pointer-events: none; }
+.loading-inner { text-align: center; color: var(--cream); }
+.loading-logo { font-family: var(--font-display); font-size: 2rem; color: var(--orange); }
+.loading-sub { font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.6; margin-top: 0.5em; }
+
+/* ─── PROGRESS & NAV DOTS ────────────────────────────────── */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--orange); width: 0%; z-index: 100; transition: width 0.2s ease;
+}
+.nav-dots {
+  position: fixed; right: clamp(0.8rem,1.5vw,1.5rem); top: 50%;
+  transform: translateY(-50%); display: flex; flex-direction: column;
+  gap: 0.55rem; z-index: 50;
+}
+.nav-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(13,43,78,0.25); cursor: pointer;
+  border: none; padding: 0; transition: all 0.3s ease;
+}
+.nav-dot:hover { background: rgba(13,43,78,0.5); transform: scale(1.2); }
+.nav-dot.active { background: var(--orange); transform: scale(1.4); }
+body.on-dark .nav-dot { background: rgba(247,246,242,0.3); }
+body.on-dark .nav-dot:hover { background: rgba(247,246,242,0.6); }
+body.on-dark .nav-dot.active { background: var(--orange); }
+
+.keyboard-hint {
+  position: fixed; bottom: clamp(0.8rem,1.5vw,1.5rem);
+  right: clamp(0.8rem,1.5vw,1.5rem); font-size: var(--small-size);
+  color: var(--ink-muted); opacity: 0.5; z-index: 50; letter-spacing: 0.1em;
+}
+body.on-dark .keyboard-hint { color: rgba(247,246,242,0.5); }
+
+/* ─── ANIMASJONER ────────────────────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity var(--duration) var(--ease-out-expo),
+              transform var(--duration) var(--ease-out-expo);
+}
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.slide.visible .reveal:nth-child(1) { transition-delay: 0.06s; }
+.slide.visible .reveal:nth-child(2) { transition-delay: 0.18s; }
+.slide.visible .reveal:nth-child(3) { transition-delay: 0.30s; }
+.slide.visible .reveal:nth-child(4) { transition-delay: 0.42s; }
+.slide.visible .reveal:nth-child(5) { transition-delay: 0.54s; }
+
+.slide.visible .card {
+  animation: cardIn 0.65s var(--ease-out-expo) backwards;
+}
+.slide.visible .card:nth-child(1) { animation-delay: 0.18s; }
+.slide.visible .card:nth-child(2) { animation-delay: 0.30s; }
+.slide.visible .card:nth-child(3) { animation-delay: 0.42s; }
+.slide.visible .card:nth-child(4) { animation-delay: 0.54s; }
+.slide.visible .card:nth-child(5) { animation-delay: 0.66s; }
+.slide.visible .card:nth-child(6) { animation-delay: 0.78s; }
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── RESPONSIV ──────────────────────────────────────────── */
+@media (max-height: 700px) {
+  :root { --slide-padding: clamp(1rem,3.5vw,2.5rem); --h2-size: clamp(1.1rem,2.8vw,1.8rem); }
+}
+@media (max-height: 600px) {
+  :root { --body-size: clamp(0.7rem,1vw,0.9rem); }
+  .nav-dots, .keyboard-hint { display: none; }
+}
+@media (max-width: 600px) {
+  :root { --title-size: clamp(1.5rem,7.5vw,2.8rem); }
+  .cards-grid.count-3, .cards-grid.count-4 { grid-template-columns: 1fr; }
+  .cards-grid.count-2 { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2ms !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div id="loading">
+  <div class="loading-inner">
+    <div class="loading-logo">H</div>
+    <div class="loading-sub">Laster presentasjon…</div>
+  </div>
+</div>
+
+<!-- Progress bar -->
+<div class="progress-bar"></div>
+
+<!-- Nav dots genereres av JS -->
+<nav class="nav-dots" aria-label="Slidenavigasjon"></nav>
+
+<!-- Keyboard hint -->
+<div class="keyboard-hint">← → navigere</div>
+
+<!-- Container hvor slides rendres -->
+<main id="presentation"></main>
+
+<script>
+/* =========================================================
+   KYSTLINJER-SVG — gjenbrukes på mørke slides
+   ========================================================= */
+function coastSVG() {
+  return `<svg class="coast-lines" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="cg" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#E8631A" stop-opacity="0"/>
+        <stop offset="50%" stop-color="#E8631A" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#E8631A" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,720 Q200,700 400,710 T800,705 T1200,720 T1600,715" stroke="#F7F6F2" stroke-width="1" fill="none" opacity="0.35"/>
+    <path d="M0,640 Q300,610 600,635 T1100,620 T1600,635" stroke="#F7F6F2" stroke-width="1" fill="none" opacity="0.25"/>
+    <path d="M0,560 Q250,530 500,548 T900,540 T1600,555" stroke="url(#cg)" stroke-width="1.5" fill="none"/>
+    <path d="M0,480 Q350,455 700,470 T1300,460 T1600,475" stroke="#F7F6F2" stroke-width="1" fill="none" opacity="0.2"/>
+    <path d="M0,400 Q200,380 400,392 T800,385 T1600,398" stroke="#F7F6F2" stroke-width="1" fill="none" opacity="0.15"/>
+  </svg>`;
+}
+
+/* =========================================================
+   LOGO — SVG-variant + bilde-variant
+   ========================================================= */
+function logoHTML(settings) {
+  const name = settings.school_name || 'Hustadvika';
+  const sub  = settings.school_subtitle || 'Vidaregåande skole';
+  const img  = settings.logo;
+
+  const mark = img
+    ? `<img src="${img}" class="logo-img" alt="${name} logo" />`
+    : `<svg class="logo-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M3 18 Q9 14 16 16.5 T29 17" stroke="var(--orange)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M5 22 Q11 19 17 21 T28 21.5" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <circle cx="22" cy="11" r="1.4" fill="var(--orange)"/>
+      </svg>`;
+
+  return `<div class="slide-logo">
+    <div class="logo">
+      ${mark}
+      <div class="logo-text">${name}<small>${sub}</small></div>
+    </div>
+  </div>`;
+}
+
+/* =========================================================
+   MARKDOWN-LIGNENDE PARSER
+   Håndterer *ord* → <span class="accent">ord</span>
+   og **ord** → <strong>ord</strong>
+   ========================================================= */
+function parseInline(txt) {
+  if (!txt) return '';
+  return txt
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,     '<span class="accent">$1</span>');
+}
+
+/* =========================================================
+   SLIDES RENDERER
+   Tar slide-data-objekt og returnerer HTML-streng
+   ========================================================= */
+function renderSlide(s, idx, total, settings) {
+  const theme = s.theme || 'warm';
+  const isDark = ['dark','deep','teal'].includes(theme);
+  const coast  = isDark ? coastSVG() : '<div class="coast-bg"></div>';
+  const logo   = logoHTML(settings);
+  const eyebrow = s.eyebrow
+    ? `<span class="eyebrow reveal">${s.eyebrow}</span>`
+    : '';
+  const slideNum = idx > 0 && idx < total - 1
+    ? `<div class="slide-number">${String(idx+1).padStart(2,'0')} / ${total}</div>`
+    : '';
+
+  /* ── TITTELSIDE ── */
+  if (s.layout === 'title' || s.layout === 'closing') {
+    const isTitle = s.layout === 'title';
+    const cls     = isTitle ? 'title-slide-content' : 'closing-content';
+    return `<section class="slide ${theme}" data-idx="${idx}">
+      ${coast}${logo}
+      <div class="slide-content ${cls}">
+        ${eyebrow}
+        <h${isTitle ? '1' : '2'} class="reveal">${parseInline(s.heading || '')}</h${isTitle ? '1' : '2'}>
+        ${s.lead ? `<p class="lead reveal" style="margin-top:0.6em;max-width:58ch;">${parseInline(s.lead)}</p>` : ''}
+        ${isTitle ? `<div class="title-meta reveal"><span>${settings.school_name}</span><span>Klar for diskusjon</span></div>` : ''}
+      </div>
+      ${slideNum}
+    </section>`;
+  }
+
+  /* ── SITAT ── */
+  if (s.layout === 'quote') {
+    return `<section class="slide ${theme}" data-idx="${idx}">
+      ${coast}${logo}
+      <div class="slide-content">
+        ${eyebrow}
+        <h2 class="reveal pullquote" style="margin-top:0.6em;">${parseInline(s.heading || '')}</h2>
+        ${s.lead ? `<p class="lead reveal" style="margin-top:1.2em;">${parseInline(s.lead)}</p>` : ''}
+        ${s.body ? `<p class="body-text reveal" style="margin-top:var(--element-gap);">${parseInline(s.body)}</p>` : ''}
+      </div>
+      ${slideNum}
+    </section>`;
+  }
+
+  /* ── STAT ── */
+  if (s.layout === 'stats') {
+    const statsHTML = (s.stats || []).map(st =>
+      `<div class="stat">
+        <div class="stat-value">${st.value}</div>
+        <div class="stat-label">${st.label}</div>
+      </div>`
+    ).join('');
+    return `<section class="slide ${theme}" data-idx="${idx}">
+      ${coast}${logo}
+      <div class="slide-content">
+        <div class="split">
+          <div>
+            ${eyebrow}
+            <div class="stat-row reveal" style="margin-top:0.5em;">${statsHTML}</div>
+          </div>
+          <div>
+            ${s.heading ? `<h2 class="reveal" style="margin-bottom:0.5em;">${parseInline(s.heading)}</h2>` : ''}
+            ${s.lead    ? `<p class="lead reveal">${parseInline(s.lead)}</p>` : ''}
+            ${s.body    ? `<p class="body-text reveal" style="margin-top:var(--element-gap);">${parseInline(s.body)}</p>` : ''}
+          </div>
+        </div>
+      </div>
+      ${slideNum}
+    </section>`;
+  }
+
+  /* ── BILDE + TEKST ── */
+  if (s.layout === 'image') {
+    const imgBlock = s.image
+      ? `<img src="${s.image}" alt="${s.image_alt || ''}" class="slide-image" />`
+      : `<div style="background:rgba(0,107,107,0.15);border-radius:12px;height:min(52vh,400px);display:flex;align-items:center;justify-content:center;color:var(--teal);opacity:0.4;font-family:var(--font-display);font-size:1.5rem;">Bilde</div>`;
+    return `<section class="slide ${theme}" data-idx="${idx}">
+      ${coast}${logo}
+      <div class="slide-content">
+        <div class="image-slide">
+          <div class="reveal">${imgBlock}</div>
+          <div>
+            ${eyebrow}
+            ${s.heading ? `<h2 class="reveal" style="margin-top:0.5em;">${parseInline(s.heading)}</h2>` : ''}
+            ${s.lead    ? `<p class="lead reveal" style="margin-top:var(--element-gap);">${parseInline(s.lead)}</p>` : ''}
+            ${s.body    ? `<p class="body-text reveal" style="margin-top:var(--element-gap);">${parseInline(s.body)}</p>` : ''}
+          </div>
+        </div>
+      </div>
+      ${slideNum}
+    </section>`;
+  }
+
+  /* ── SPLIT (to kolonner med bullet-liste) ── */
+  if (s.layout === 'split') {
+    const bullets = (s.bullets || []).map(b =>
+      `<li>${b.strong ? `<strong>${b.strong}</strong> ` : ''}${b.text}</li>`
+    ).join('');
+    return `<section class="slide ${theme}" data-idx="${idx}">
+      ${coast}${logo}
+      <div class="slide-content">
+        <div class="split">
+          <div>
+            ${eyebrow}
+            ${s.heading ? `<h2 class="reveal" style="margin-top:0.5em;">${parseInline(s.heading)}</h2>` : ''}
+            ${s.lead    ? `<p class="lead reveal" style="margin-top:var(--element-gap);">${parseInline(s.lead)}</p>` : ''}
+            ${s.body    ? `<p class="body-text reveal" style="margin-top:var(--element-gap);">${parseInline(s.body)}</p>` : ''}
+          </div>
+          ${bullets ? `<ul class="feature-list reveal">${bullets}</ul>` : ''}
+        </div>
+      </div>
+      ${slideNum}
+    </section>`;
+  }
+
+  /* ── CARDS (standard) ── */
+  const cards = s.cards || [];
+  const cardCount = cards.length;
+  const gridClass = cardCount <= 2 ? 'count-2' : cardCount <= 3 ? 'count-3' : 'count-4';
+  const cardsHTML = cards.map(c =>
+    `<div class="card">
+      ${c.num   ? `<div class="card-num">${c.num}</div>` : ''}
+      ${c.title ? `<div class="card-title">${c.title}</div>` : ''}
+      ${c.body  ? `<div class="card-body">${c.body}</div>` : ''}
+    </div>`
+  ).join('');
+
+  return `<section class="slide ${theme}" data-idx="${idx}">
+    ${coast}${logo}
+    <div class="slide-content">
+      ${eyebrow}
+      ${s.heading ? `<h2 class="reveal" style="max-width:24ch;margin-top:0.5em;">${parseInline(s.heading)}</h2>` : ''}
+      ${s.lead    ? `<p class="lead reveal" style="margin-top:0.3em;">${parseInline(s.lead)}</p>` : ''}
+      ${cardsHTML ? `<div class="cards-grid ${gridClass}">${cardsHTML}</div>` : ''}
+      ${s.body    ? `<p class="body-text reveal" style="margin-top:var(--content-gap);">${parseInline(s.body)}</p>` : ''}
+    </div>
+    ${slideNum}
+  </section>`;
+}
+
+/* =========================================================
+   HENT DATA OG BYGG PRESENTASJONEN
+   ========================================================= */
+async function loadData() {
+  // Hent innstillinger
+  let settings = {};
+  try {
+    const r = await fetch('_data/settings.json');
+    settings = await r.json();
+  } catch(e) { console.warn('Kunne ikke laste settings.json, bruker standard.'); }
+
+  // Oppdater CSS-variabler fra settings
+  if (settings.color_primary)   document.documentElement.style.setProperty('--navy',   settings.color_primary);
+  if (settings.color_primary)   document.documentElement.style.setProperty('--navy-deep', adjustHex(settings.color_primary, -20));
+  if (settings.color_secondary) document.documentElement.style.setProperty('--teal',   settings.color_secondary);
+  if (settings.color_accent)    document.documentElement.style.setProperty('--orange', settings.color_accent);
+  if (settings.color_light)     document.documentElement.style.setProperty('--cream',  settings.color_light);
+
+  // Hent alle slide-filer via directory listing
+  // Decap CMS lagrer individuelle JSON-filer i _data/slides/
+  // Vi bruker en kjent liste (generert ved build) eller fetcher filene
+  let slides = [];
+  try {
+    // Prøv å hente samlet index hvis den finnes
+    const r = await fetch('_data/slides-index.json');
+    const index = await r.json();
+    const loaded = await Promise.all(
+      index.map(fn => fetch(`_data/slides/${fn}`).then(r => r.json()).catch(() => null))
+    );
+    slides = loaded.filter(Boolean);
+  } catch(e) {
+    // Fallback: prøv kjente filnavn fra initial data
+    const known = [
+      '010-tittel.json','020-executive-summary.json','030-robinson.json',
+      '040-fire-spor.json','050-kjernekompetanser.json','060-tiltak.json',
+      '070-klasseledelse.json','080-profesjonell-utvikling.json','090-fravaer.json',
+      '100-suksessfaktorer.json','110-barrierer.json','120-overgang-hustadvika.json',
+      '130-forankring-kort.json','140-forankring-lang.json','150-tidslinje.json',
+      '160-avslutning.json'
+    ];
+    const loaded = await Promise.all(
+      known.map(fn => fetch(`_data/slides/${fn}`).then(r => r.json()).catch(() => null))
+    );
+    slides = loaded.filter(Boolean);
+  }
+
+  // Sorter etter order-feltet
+  slides.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+  return { settings, slides };
+}
+
+function adjustHex(hex, amount) {
+  // Gjør hex mørkere/lysere for avledede farger
+  const num = parseInt(hex.slice(1), 16);
+  const r = Math.max(0, Math.min(255, (num >> 16) + amount));
+  const g = Math.max(0, Math.min(255, ((num >> 8) & 0xff) + amount));
+  const b = Math.max(0, Math.min(255, (num & 0xff) + amount));
+  return '#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('');
+}
+
+/* =========================================================
+   PRESENTASJONS­KONTROLLER
+   ========================================================= */
+class SlidePresentation {
+  constructor(total) {
+    this.slides   = Array.from(document.querySelectorAll('.slide'));
+    this.current  = 0;
+    this.total    = total;
+    this.navEl    = document.querySelector('.nav-dots');
+    this.progress = document.querySelector('.progress-bar');
+
+    this.setupObserver();
+    this.setupKeyboard();
+    this.setupTouch();
+    this.setupScrollProgress();
+    this.buildNavDots();
+  }
+
+  setupObserver() {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting && e.intersectionRatio > 0.5) {
+          e.target.classList.add('visible');
+          this.current = parseInt(e.target.dataset.idx);
+          this.updateDots();
+          this.updateTheme(e.target);
+        }
+      });
+    }, { threshold: [0.5] });
+    this.slides.forEach(s => obs.observe(s));
+  }
+
+  updateTheme(slide) {
+    const dark = ['dark','deep','teal'].some(c => slide.classList.contains(c));
+    document.body.classList.toggle('on-dark', dark);
+  }
+
+  setupKeyboard() {
+    document.addEventListener('keydown', e => {
+      const next = ['ArrowDown','ArrowRight',' ','PageDown'];
+      const prev = ['ArrowUp','ArrowLeft','PageUp'];
+      if (next.includes(e.key)) { e.preventDefault(); this.go(this.current + 1); }
+      if (prev.includes(e.key)) { e.preventDefault(); this.go(this.current - 1); }
+      if (e.key === 'Home') { e.preventDefault(); this.go(0); }
+      if (e.key === 'End')  { e.preventDefault(); this.go(this.slides.length - 1); }
+    });
+  }
+
+  setupTouch() {
+    let ty = 0;
+    document.addEventListener('touchstart', e => { ty = e.touches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend',   e => {
+      const d = ty - e.changedTouches[0].clientY;
+      if (Math.abs(d) > 50) this.go(this.current + (d > 0 ? 1 : -1));
+    }, { passive: true });
+  }
+
+  setupScrollProgress() {
+    window.addEventListener('scroll', () => {
+      const p = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+      this.progress.style.width = p + '%';
+    }, { passive: true });
+  }
+
+  buildNavDots() {
+    this.navEl.innerHTML = '';
+    this.slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'nav-dot';
+      d.setAttribute('aria-label', `Slide ${i+1}`);
+      d.addEventListener('click', () => this.go(i));
+      this.navEl.appendChild(d);
+    });
+    this.updateDots();
+  }
+
+  updateDots() {
+    this.navEl.querySelectorAll('.nav-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === this.current);
+    });
+  }
+
+  go(idx) {
+    const t = Math.max(0, Math.min(idx, this.slides.length - 1));
+    this.slides[t].scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+/* =========================================================
+   BOOTSTRAP
+   ========================================================= */
+(async () => {
+  try {
+    const { settings, slides } = await loadData();
+    const container = document.getElementById('presentation');
+    document.title = `${settings.school_name || 'Hustadvika VGS'} — Presentasjon`;
+
+    if (!slides.length) {
+      container.innerHTML = '<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;color:#666;">Ingen slides funnet. Sjekk at _data/slides/-mappen inneholder JSON-filer.</div>';
+      return;
+    }
+
+    // Render alle slides
+    container.innerHTML = slides
+      .map((s, i) => renderSlide(s, i, slides.length, settings))
+      .join('\n');
+
+    // Start kontroller
+    new SlidePresentation(slides.length);
+
+    // Trigger første slide
+    requestAnimationFrame(() => {
+      const first = container.querySelector('.slide');
+      if (first) {
+        first.classList.add('visible');
+        const dark = ['dark','deep','teal'].some(c => first.classList.contains(c));
+        document.body.classList.toggle('on-dark', dark);
+      }
+    });
+
+  } catch(err) {
+    console.error('Feil ved lasting:', err);
+  } finally {
+    // Fjern loading screen
+    const loader = document.getElementById('loading');
+    loader.classList.add('fade');
+    setTimeout(() => loader.remove(), 600);
+  }
+})();
+</script>
+
+</body>
+</html>
